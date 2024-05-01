@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <h2>Route Bearbeiten</h2>
+  <form (ngSubmit)="saveRoute()">
+    <!-- Vehicle ID -->
+    <div class="mb-3">
+      <label for="vehicleId" class="form-label">Fahrzeug-ID:</label>
+      <input type="text" class="form-control" id="vehicleId" [(ngModel)]="routeDetails.vehicle.id" name="vehicleId" readonly>
+    </div>
+
+    <!-- Route ID -->
+    <div class="mb-3">
+      <label for="routeId" class="form-label">Route-ID:</label>
+      <input type="text" class="form-control" id="routeId" [(ngModel)]="routeDetails.id" name="routeId" readonly>
+    </div>
+
+    <!-- Vehicle Name (Read-Only) -->
+    <div class="mb-3">
+      <label for="vehicleName" class="form-label">Fahrzeugbezeichnung:</label>
+      <input type="text" class="form-control" id="vehicleName" [(ngModel)]="routeDetails.vehicleName" name="vehicleName" readonly>
+    </div>
+
+    <!-- Vehicle Type (Read-Only) -->
+    <div class="mb-3">
+      <label for="vehicleType" class="form-label">Fahrzeugtyp:</label>
+      <input type="text" class="form-control" id="vehicleType" [(ngModel)]="routeDetails.vehicleType" name="vehicleType" readonly>
+    </div>
+
+    <!-- Start Point Address (Editable) -->
+    <div class="mb-3">
+      <label for="startPoint" class="form-label">Startpunkt Adresse:</label>
+      <input type="text" class="form-control" id="startPoint" [(ngModel)]="routeDetails.startPoint" name="startPoint" required>
+    </div>
+
+    <!-- End Point Address (Editable) -->
+    <div class="mb-3">
+      <label for="endPoint" class="form-label">Endpunkt Adresse:</label>
+      <input type="text" class="form-control" id="endPoint" [(ngModel)]="routeDetails.endPoint" name="endPoint" required>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-modern-success me-2">Speichern</button>
+      <button type="button" class="btn btn-modern-secondary" (click)="goBack()">Zurück</button>
+    </div>
+
+    <!-- Map Display Section -->
+    <div class="map-section">
+      <h4 class="mt-4 mb-2">Route auf der Karte</h4>
+      <div id="map" class="map-container mb-3"></div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,244 @@
+.mb-3 {
+  height: 70px;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.col-width {
+  width: 150px;
+}
+
+.distance {
+  height: 50px;
+}
+
+hr.style-two {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.selected {
+  background-color: lightgreen;
+}
+
+.icon {
+  width: 30px;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  margin-right: 5px;
+}
+
+.icon-small{
+  width: 20px;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  margin-right: 8px;
+}
+
+.icon-info{
+  width: 20px;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  margin-right: 8px;
+}
+
+@media (max-width: 1400px) {
+  .icon-info {
+    display: none;
+  }
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5)); /* Schatten hinzufügen */
+}
+
+.toggle-button.active img {
+  transform: scale(1.2);
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5)); /* Schatten hinzufügen */
+}
+
+th:first-child {
+  position: sticky;
+  left: 0;
+  background-color: white; /* Hintergrundfarbe anpassen */
+  z-index: 1; /* Ebenen-Index erhöhen, um die Spalte über den Rest der Tabelle zu legen */
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background-color: #fff; /* Hintergrundfarbe anpassen */
+  z-index: 1; /* Ebenen-Index erhöhen, um die Kopfzeile über den Rest der Tabelle zu legen */
+}
+
+.search-container input[type="search"] {
+  padding-right: 40px; /* Platz für das Lupe-Bild schaffen */
+  background-image: url('/frontend/src/assets/glasses.png');
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  background-position: right 10px center;
+}
+
+.text-label {
+  margin-bottom: 0;
+  font-size: 12px;
+  color: #8f8f8f;
+  margin-top: 12px;
+}
+
+.label-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: -4px;
+}
+
+.error-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.input-wrapper {
+  margin-top: 5px;
+}
+
+.invalid-feedback {
+  margin-top: 0px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  text-align: center; /* Centers text horizontally */
+  vertical-align: middle; /* Centers text vertically */
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  background-color: #fff;
+}
+
+.table th:first-child, .table td:first-child {
+  border-left: 1px solid #dee2e6;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: bold;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Row hover effect */
+.table-hover tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+/* Rounded corners for the first and last cell in each row */
+.table th:first-child, .table td:first-child {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.table th:last-child, .table td:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-right: 1px solid #dee2e6;
+}
+
+/* Button Styling */
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-smooth-primary {
+  background-color: #007bff; /* Primary Button Color */
+  color: white;
+  border-radius: 20px; /* Smooth rounded edges */
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-smooth-green {
+  background-color: #28a745; /* Green Button Color */
+  color: white;
+  border-radius: 20px; /* Smooth rounded edges */
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-smooth-secondary {
+  background-color: #6c757d; /* Secondary Button Color */
+  color: white;
+  border-radius: 20px; /* Smooth rounded edges */
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+  position: absolute; /* Position it to the right */
+  right: 0;
+}
+
+.btn-smooth-primary:hover,
+.btn-smooth-green:hover,
+.btn-smooth-secondary:hover {
+  opacity: 0.8; /* Slight transparency on hover */
+}
+
+.btn-modern-success:hover {
+  background-color: #28a745; /* Green */
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-modern-danger:hover {
+  background-color: #dc3545; /* Red */
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-modern-secondary:hover {
+  background-color: #6c757d; /* Gray */
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-modern-success:hover,
+.btn-modern-danger:hover,
+.btn-modern-secondary:hover {
+  transform: scale(1.05); /* Enlarges the button */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+}
+
+

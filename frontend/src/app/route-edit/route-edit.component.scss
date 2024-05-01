@@ -1,0 +1,113 @@
+.btn-smooth-primary {
+  background-color: #007bff; /* Primary Button Color */
+  color: white;
+  border-radius: 20px; /* Smooth rounded edges */
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-smooth-green {
+  background-color: #28a745; /* Green Button Color */
+  color: white;
+  border-radius: 20px; /* Smooth rounded edges */
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-smooth-secondary {
+  background-color: #6c757d; /* Secondary Button Color */
+  color: white;
+  border-radius: 20px; /* Smooth rounded edges */
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+  position: absolute; /* Position it to the right */
+  right: 0;
+}
+
+.btn-smooth-primary:hover,
+.btn-smooth-green:hover,
+.btn-smooth-secondary:hover {
+  opacity: 0.8; /* Slight transparency on hover */
+}
+
+.btn-modern-success {
+  background-color: #28a745; /* Green */
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-modern-danger {
+  background-color: #dc3545; /* Red */
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-modern-secondary {
+  background-color: #6c757d; /* Gray */
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-modern-success:hover,
+.btn-modern-danger:hover,
+.btn-modern-secondary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-map-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-container {
+  flex: 1;
+}
+
+.map-section {
+  flex: 1;
+  max-width: 500px; /* Adjust the width of the map section if needed */
+}
+
+.form-map-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-container, .map-and-buttons {
+  flex: 1;
+  margin-right: 20px; /* Add some spacing between the form and the map section */
+}
+
+.map-container {
+  height: 300px;
+  width: 500px; /* Adjust as needed */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+  margin-bottom: 20px; /* Space before the action buttons */
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the left */
+  gap: 10px; /* Add some space between buttons */
+}
+
+/* Adjust if more spacing is needed for the form inputs */
+.form-control {
+  margin-bottom: 15px;
+}
+
+
+
+
+

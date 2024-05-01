@@ -1,0 +1,58 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { CommonModule, DatePipe } from '@angular/common';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { VehicleCreateComponent } from './vehicle-create/vehicle-create.component';
+import { HttpClientModule } from "@angular/common/http";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
+import { VehicleListComponent } from './vehicle-list/./vehicle-list.component';
+import { RouteEditComponent } from './route-edit/route-edit.component';
+import { RouteListComponent } from './route-list/route-list.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatTableModule} from "@angular/material/table";
+import {MatToolbarModule} from "@angular/material/toolbar";
+
+const routes: Routes = [
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'createVehicle', component: VehicleCreateComponent},
+  {path: 'listVehicle', component: VehicleListComponent},
+  {path: 'editVehicle/:id', component: VehicleEditComponent},
+  {path: 'listRoute', component: RouteListComponent},
+  {path: 'editRoute/:id', component: RouteEditComponent},
+];
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    VehicleCreateComponent,
+    DashboardComponent,
+    VehicleEditComponent,
+    VehicleListComponent,
+    RouteEditComponent,
+    RouteListComponent,
+  ],
+  imports: [
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    CommonModule,
+    MatTabsModule,
+    MatTableModule,
+    MatToolbarModule,
+  ],
+  providers: [
+    DatePipe
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+
+}

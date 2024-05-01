@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h2>Fahrzeug Bearbeiten</h2>
+  <form (ngSubmit)="saveVehicle()">
+    <div class="mb-3">
+      <label for="vehicleType" class="form-label">Fahrzeugtyp:</label>
+      <input type="text" class="form-control" id="vehicleType" [(ngModel)]="vehicle.vehicleType" name="vehicleType" required>
+    </div>
+    <div class="mb-3">
+      <label for="vehicleName" class="form-label">Fahrzeugbezeichnung:</label>
+      <input type="text" class="form-control" id="vehicleName" [(ngModel)]="vehicle.vehicleName" name="vehicleName" required>
+    </div>
+    <div class="mb-3">
+      <label for="seats" class="form-label">Sitzplätze:</label>
+      <input type="number" class="form-control" id="seats" [(ngModel)]="vehicle.seats" name="seats" min="1" required>
+    </div>
+    <div class="mb-3">
+      <label for="wheelchairAccessible" class="form-label">Rollstuhlgerecht:</label>
+      <select class="form-select" id="wheelchairAccessible" [(ngModel)]="vehicle.wheelchairAccessible" name="wheelchairAccessible" required>
+        <option value="true">Ja</option>
+        <option value="false">Nein</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="startPoint" class="form-label">Startpunkt Adresse:</label>
+      <input type="text" class="form-control" id="startPoint" [(ngModel)]="vehicle.startPoint" name="startPoint" required>
+    </div>
+    <div class="mb-3">
+      <label for="endPoint" class="form-label">Endpunkt Adresse:</label>
+      <input type="text" class="form-control" id="endPoint" [(ngModel)]="vehicle.endPoint" name="endPoint" required>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div>
+        <button type="submit" class="btn btn-modern-success me-2">Speichern</button>
+        <button type="button" class="btn btn-modern-danger" (click)="deleteVehicle()">Löschen</button>
+      </div>
+      <button type="button" class="btn btn-modern-secondary" (click)="goBack()">Zurück</button>
+    </div>
+  </form>
+</div>

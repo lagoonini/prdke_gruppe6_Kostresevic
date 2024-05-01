@@ -1,0 +1,32 @@
+<h2>Fahrzeugliste</h2>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="thead-light">
+    <tr>
+      <th>#</th>
+      <th>Fahrzeugtyp</th>
+      <th>Fahrzeugbezeichnung</th>
+      <th>Sitzplätze</th>
+      <th>Rollstuhlgerecht</th>
+      <th>Startpunkt</th>
+      <th>Endpunkt</th>
+      <th>Aktionen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vehicle of vehicles; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ vehicle.vehicleType }}</td>
+      <td>{{ vehicle.vehicleName }}</td>
+      <td>{{ vehicle.seats }}</td>
+      <td>{{ vehicle.wheelchairAccessible ? 'Ja' : 'Nein' }}</td>
+      <td>{{ vehicle.startPoint }}</td>
+      <td>{{ vehicle.endPoint }}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-edit" (click)="editVehicle(vehicle.id)">Bearbeiten</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteVehicle(vehicle.id)">Löschen</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <img class="logo" src="./assets/main_icon.png">
+  <button
+    class='navbar-toggler'
+    type='button'
+    data-bs-toggle='collapse'
+    data-bs-target='#navbarNav'
+    aria-controls='navbarNav'
+    aria-expanded='false'
+    aria-label='Toggle navigation'>
+    <span class='navbar-toggler-icon'></span>
+  </button>
+
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown active">
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">Dashboard</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="vehicleDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Fahrzeugverwaltung
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/createVehicle">Neues Fahrzeug</a>
+            <a class="dropdown-item" routerLink="/listVehicle">Fahrzeugliste</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="routeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Routen
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/listRoute">Routenliste</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="body">
+  <router-outlet></router-outlet>
+</div>

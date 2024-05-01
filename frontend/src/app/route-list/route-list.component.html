@@ -1,0 +1,35 @@
+<!-- route-list.component.html -->
+
+<h2>Routenliste</h2>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="thead-light">
+    <tr>
+      <th>Routen Nr.</th>
+      <th>Fahrzeug ID</th>
+      <th>Fahrzeugname</th>
+      <th>Fahrzeugtyp</th>
+      <th>Startpunkt</th>
+      <th>Endpunkt</th>
+      <th>Startpunkt Koordinaten</th>
+      <th>Endpunkt Koordinaten</th>
+      <th>Aktionen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let route of routes; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ route.vehicle.id }}</td>
+      <td>{{ route.vehicleName }}</td>
+      <td>{{ route.vehicleType }}</td>
+      <td>{{ route.startPoint }}</td>
+      <td>{{ route.endPoint }}</td>
+      <td>{{ route.startPointLatitude }}, {{ route.startPointLongitude }}</td>
+      <td>{{ route.endPointLatitude }}, {{ route.endPointLongitude }}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-edit" (click)="editRoute(route.id)">Bearbeiten</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

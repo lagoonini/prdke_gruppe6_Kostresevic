@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <h2>Neues Fahrzeug Anlegen</h2>
+      <form (ngSubmit)="saveVehicle()" #vehicleForm="ngForm">
+        <div class="mb-3">
+          <label for="vehicleType" class="form-label">Fahrzeugtyp:</label>
+          <input type="text" class="form-control" id="vehicleType" [(ngModel)]="vehicleType" name="vehicleType" required>
+        </div>
+        <div class="mb-3">
+          <label for="vehicleName" class="form-label">Fahrzeugbezeichnung:</label>
+          <input type="text" class="form-control" id="vehicleName" [(ngModel)]="vehicleName" name="vehicleName" required>
+        </div>
+        <div class="mb-3">
+          <label for="seats" class="form-label">Sitzplätze:</label>
+          <input type="number" class="form-control" id="seats" [(ngModel)]="seats" name="seats" min="1" required>
+        </div>
+        <div class="mb-3">
+          <label for="wheelchairAccessible" class="form-label">Rollstuhlgerecht:</label>
+          <select class="form-select" id="wheelchairAccessible" [(ngModel)]="wheelchairAccessible" name="wheelchairAccessible" required>
+            <option [ngValue]="true">Ja</option>
+            <option [ngValue]="false">Nein</option>
+          </select>
+        </div>
+        <!-- Start Point Address -->
+        <div class="mb-3">
+          <label for="startPoint" class="form-label">Startpunkt Adresse:</label>
+          <input type="text" class="form-control" id="startPoint" [(ngModel)]="startPoint" name="startPoint" required>
+        </div>
+        <!-- End Point Address -->
+        <div class="mb-3">
+          <label for="endPoint" class="form-label">Endpunkt Adresse:</label>
+          <input type="text" class="form-control" id="endPoint" [(ngModel)]="endPoint" name="endPoint" required>
+        </div>
+        <button type="submit" class="btn btn-smooth-green">Speichern</button>
+        <button type="button" class="btn btn-smooth-primary" (click)="resetForm()">Formular zurücksetzen</button>
+      </form>
+    </div>
+  </div>
+</div>
