@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name = "Vehicles")
 public class Vehicle {
     @Id
     @GeneratedValue(generator = "custom-generator")
