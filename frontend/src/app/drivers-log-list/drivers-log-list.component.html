@@ -1,0 +1,30 @@
+<h2>Fahrtenblätter</h2>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="thead-light">
+    <tr>
+      <th>Fahrtenblatt ID</th>
+      <th>Rechnungsstatus</th>
+      <th>Route ID</th>
+      <th>Vehicle ID</th>
+      <th>Startpunkt</th>
+      <th>Endpunkt</th>
+      <th>Aktionen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let log of logs; let i = index">
+      <td>{{ log.id }}</td>
+      <td>{{ log.invoiceStatus }}</td>
+      <td>{{ log.route.id }}</td>
+      <td>{{ log.route.vehicle.id }}</td>
+      <td>{{ log.route.startPoint }}</td>
+      <td>{{ log.route.endPoint }}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-edit" (click)="viewLog(log.id)">Details</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteLog(log.id)">Löschen</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

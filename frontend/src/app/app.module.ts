@@ -13,9 +13,12 @@ import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import { VehicleListComponent } from './vehicle-list/./vehicle-list.component';
 import { RouteEditComponent } from './route-edit/route-edit.component';
 import { RouteListComponent } from './route-list/route-list.component';
-import {MatTabsModule} from "@angular/material/tabs";
-import {MatTableModule} from "@angular/material/table";
-import {MatToolbarModule} from "@angular/material/toolbar";
+import { DriversLogListComponent } from './drivers-log-list/drivers-log-list.component';
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatTableModule } from "@angular/material/table";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { DriversLogViewComponent } from './drivers-log-view/drivers-log-view.component';
+
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
@@ -24,6 +27,8 @@ const routes: Routes = [
   {path: 'editVehicle/:id', component: VehicleEditComponent},
   {path: 'listRoute', component: RouteListComponent},
   {path: 'editRoute/:id', component: RouteEditComponent},
+  {path: 'listDriverLogs', component: DriversLogListComponent},
+  {path: 'drivers-log-view/:id', component: DriversLogViewComponent},
 ];
 
 @NgModule({
@@ -36,6 +41,8 @@ const routes: Routes = [
     VehicleListComponent,
     RouteEditComponent,
     RouteListComponent,
+    DriversLogListComponent,
+    DriversLogViewComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

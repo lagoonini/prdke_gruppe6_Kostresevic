@@ -1,0 +1,39 @@
+<h2>Fahrtenblatt Details</h2>
+<div *ngIf="log$ | async as log">
+  <table class="table table-bordered">
+    <tbody>
+    <tr>
+      <th scope="row">Fahrtenblatt ID:</th>
+      <td>{{ log.id }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Rechnungsstatus:</th>
+      <td>{{ log.invoiceStatus }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Route-ID:</th>
+      <td>{{ log.route.id }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Fahrzeug-ID:</th>
+      <td>{{ log.route.vehicle.id }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Startpunkt Adresse:</th>
+      <td>{{ log.route.startPoint }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Endpunkt Adresse:</th>
+      <td>{{ log.route.endPoint }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Angefahrene Adressen:</th>
+      <td>
+        <ul class="list-unstyled">
+          <li *ngFor="let address of log.addresses">{{ address }}</li>
+        </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

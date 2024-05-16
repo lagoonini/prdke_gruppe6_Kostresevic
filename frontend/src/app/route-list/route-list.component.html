@@ -1,5 +1,3 @@
-<!-- route-list.component.html -->
-
 <h2>Routenliste</h2>
 <div class="table-responsive">
   <table class="table table-hover">
@@ -11,8 +9,6 @@
       <th>Fahrzeugtyp</th>
       <th>Startpunkt</th>
       <th>Endpunkt</th>
-      <th>Startpunkt Koordinaten</th>
-      <th>Endpunkt Koordinaten</th>
       <th>Aktionen</th>
     </tr>
     </thead>
@@ -24,8 +20,6 @@
       <td>{{ route.vehicleType }}</td>
       <td>{{ route.startPoint }}</td>
       <td>{{ route.endPoint }}</td>
-      <td>{{ route.startPointLatitude }}, {{ route.startPointLongitude }}</td>
-      <td>{{ route.endPointLatitude }}, {{ route.endPointLongitude }}</td>
       <td>
         <button class="btn btn-sm btn-outline-edit" (click)="editRoute(route.id)">Bearbeiten</button>
       </td>
