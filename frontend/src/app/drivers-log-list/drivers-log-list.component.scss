@@ -84,14 +84,6 @@ thead {
   z-index: 1; /* Ebenen-Index erhöhen, um die Kopfzeile über den Rest der Tabelle zu legen */
 }
 
-.search-container input[type="search"] {
-  padding-right: 40px; /* Platz für das Lupe-Bild schaffen */
-  background-image: url('/frontend/src/assets/glasses.png');
-  background-repeat: no-repeat;
-  background-size: 25px 25px;
-  background-position: right 10px center;
-}
-
 .text-label {
   margin-bottom: 0;
   font-size: 12px;
