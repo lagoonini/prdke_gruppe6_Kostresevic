@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>Invoice Details</h1>
+  <div *ngIf="invoiceDetails" id="pdf-content">
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <th scope="row">Invoice ID:</th>
+        <td>{{ invoiceDetails.invoiceId }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Created Date:</th>
+        <td>{{ invoiceDetails.createdDate | date:'medium' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Distance (km):</th>
+        <td>{{ invoiceDetails.distance | number:'1.2-2' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Total Cost:</th>
+        <td>{{ invoiceDetails.totalCost | currency:'EUR' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Route ID:</th>
+        <td>{{ invoiceDetails.route.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Vehicle ID:</th>
+        <td>{{ invoiceDetails.route.vehicle.id }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div id="map"></div>
+  </div>
+  <div *ngIf="!invoiceDetails">
+    <p>Loading invoice details...</p>
+  </div>
+</div>
+
+<button (click)="downloadPDF()">Download as PDF</button>
+

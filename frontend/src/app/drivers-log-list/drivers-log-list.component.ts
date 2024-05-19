@@ -63,4 +63,14 @@ export class DriversLogListComponent implements OnInit {
   viewLog(id: number): void {
     this.router.navigate(['/drivers-log-view', id]);
   }
+
+  generateInvoice(id: number): void {
+    this.http.post(`http://localhost:8080/drivers-log/${id}/generate-invoice`, {}).subscribe({
+      next: () => {
+        alert('Invoice generated successfully!');
+        this.loadLogs(); // Refresh the list after invoice generation
+      },
+      error: (error) => console.error('Error generating invoice:', error)
+    });
+  }
 }

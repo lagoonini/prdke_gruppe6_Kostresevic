@@ -21,8 +21,9 @@
       <td>{{ log.route.startPoint }}</td>
       <td>{{ log.route.endPoint }}</td>
       <td>
+        <button class="btn btn-sm btn-outline-success" (click)="generateInvoice(log.id)" [disabled]="log.invoiceStatus === 'Abgeschlossen'">Rechnung generieren</button>
         <button class="btn btn-sm btn-outline-edit" (click)="viewLog(log.id)">Details</button>
-        <button class="btn btn-sm btn-danger" (click)="deleteLog(log.id)">Löschen</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteLog(log.id)">Löschen</button>
       </td>
     </tr>
     </tbody>

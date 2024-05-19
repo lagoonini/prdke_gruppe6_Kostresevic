@@ -7,6 +7,8 @@ import {RouteListComponent} from "./route-list/route-list.component";
 import {RouteEditComponent} from "./route-edit/route-edit.component";
 import {DriversLogListComponent} from "./drivers-log-list/drivers-log-list.component";
 import { DriversLogViewComponent } from './drivers-log-view/drivers-log-view.component';
+import {InvoiceListComponent} from "./invoice-list/invoice-list.component";
+import {InvoiceViewComponent} from "./invoice-view/invoice-view.component";
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'editRoute/:id', component: RouteEditComponent},
   { path: 'listDriverLogs', component: DriversLogListComponent},
   { path: 'drivers-log-view/:id', component: DriversLogViewComponent},
+  { path: 'listInvoices', component: InvoiceListComponent },
+  { path: 'invoice-view/:id', component: InvoiceViewComponent },
 ];
 
 @NgModule({
