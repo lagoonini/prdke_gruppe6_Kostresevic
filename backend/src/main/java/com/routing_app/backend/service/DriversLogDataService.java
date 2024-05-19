@@ -56,7 +56,7 @@ public class DriversLogDataService {
 
             List<String> addresses = new ArrayList<>();
             addresses.add(mockRoute.getStartPoint()); // Start point address
-            addresses.addAll(Arrays.asList("Freistädter Strasse 317, 4040 Linz")); // Additional fictional address
+            addresses.addAll(Arrays.asList("Freistädter Strasse 317, 4040 Linz", "Altenberger Strasse 69 Linz")); // Additional fictional address
             addresses.add(mockRoute.getEndPoint()); // End point address
 
             DriversLogData mockLogData = new DriversLogData();

@@ -7,7 +7,8 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { decode } from '@mapbox/polyline';
 import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import 'leaflet-simple-map-screenshoter';
+import 'leaflet-easyprint';
 
 
 interface Coordinate {
@@ -46,6 +47,8 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
   invoice$: Observable<Invoice> = of();
   invoiceDetails: Invoice | undefined;
   private map: L.Map | undefined;
+  mapInitialized = false;  // Flag to check if the map is initialized
+
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -55,7 +58,14 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // initMap will be called in the subscription when invoiceDetails is set
+    setTimeout(() => {
+      if (this.mapContainer) {
+        this.initMap();
+        // any further operations that depend on mapContainer
+      } else {
+        console.error('mapContainer is not available');
+      }
+    }, 0);
   }
 
   loadInvoiceDetails(): void {
@@ -93,6 +103,19 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
         console.log('Map initialized:', this.map);
 
         this.drawRoute();
+        // Adding EasyPrint control directly to the map
+        const printControl = L.easyPrint({
+          title: 'Print map',
+          position: 'topleft',
+          sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
+          filename: 'myMap',
+          exportOnly: true,
+          hideControlContainer: true,
+          hidden: true // Hide the control, use programmatically
+        }).addTo(this.map);
+
+        // Store the printControl for later use
+        (this.map as any).easyPrintControl = printControl;
       } else {
         console.error("Map container not found.");
       }
@@ -100,6 +123,7 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
   }
 
   private drawRoute(): void {
+    this.mapInitialized = true;
     if (!this.invoiceDetails || !this.map || this.invoiceDetails.coordinates.length === 0) {
       console.error('Invoice coordinates or map instance are missing');
       return;
@@ -186,6 +210,7 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
           popupAnchor: [0, -20] // Point from which the popup should open relative to the iconAnchor
         });
 
+
         // Log the coordinates for markers and decoded route for comparison
         if (this.invoiceDetails?.coordinates) {
           console.log('Coordinates for markers:', this.invoiceDetails.coordinates);
@@ -198,6 +223,21 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
             const offset = 0.0001; // Small offset value
             const latitudeOffset = coord.latitude + (index % 2 === 0 ? offset : -offset);
             const longitudeOffset = coord.longitude + (index % 2 === 0 ? offset : -offset);
+
+            let iconUrl = 'assets/map_pointer_icon.png'; // Default icon
+            if (index % 3 === 1) {
+              iconUrl = 'assets/map_pointer_icon_blue.png'; // Second icon
+            } else if (index % 3 === 2) {
+              iconUrl = 'assets/map_pointer_icon_green.png'; // Third icon
+            }
+
+            // Define the custom icon using the determined URL
+            const customIcon = L.icon({
+              iconUrl: iconUrl,
+              iconSize: [40, 50],
+              iconAnchor: [15, 20],
+              popupAnchor: [0, -20]
+            });
 
             const address = await this.getAddress(coord.latitude, coord.longitude);
             const marker = L.marker([latitudeOffset, longitudeOffset], { icon: customIcon })
@@ -222,52 +262,16 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public downloadPDF(): void {
-    setTimeout(() => {
-      const data = document.getElementById('pdf-content');
-      console.log('PDF Content Element:', data);
-      if (!data) {
-        console.error("PDF content not found.");
-        return;
-      }
-
-      const mapElement = this.mapContainer.nativeElement;
-      if (!mapElement) {
-        console.error("Map element not found.");
-        return;
-      }
-
-      html2canvas(mapElement, { useCORS: true }).then(mapCanvas => {
-        const mapImgData = mapCanvas.toDataURL('image/png');
-
-        html2canvas(data, { scale: 2 }).then(contentCanvas => {
-          const contentImgData = contentCanvas.toDataURL('image/png');
-          const pdf = new jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: 'a4'
-          });
-
-          // Add the content to the PDF
-          const imgProps = pdf.getImageProperties(contentImgData);
-          const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-          pdf.addImage(contentImgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-
-          // Add the map to the PDF on a new page
-          pdf.addPage();
-          const mapImgProps = pdf.getImageProperties(mapImgData);
-          const mapPdfWidth = pdf.internal.pageSize.getWidth();
-          const mapPdfHeight = (mapImgProps.height * mapPdfWidth) / mapImgProps.width;
-          pdf.addImage(mapImgData, 'PNG', 0, 0, mapPdfWidth, mapPdfHeight);
-
-          pdf.save('invoice.pdf');
-        }).catch(error => {
-          console.error('Error generating PDF content:', error);
-        });
-      }).catch(error => {
-        console.error('Error capturing map as PNG:', error);
-      });
-    }, 500); // Adding delay to ensure map rendering is complete
+  public captureMap(): void {
+    if (this.map && (this.map as any).easyPrintControl) {
+      const printControl = (this.map as any).easyPrintControl;
+      setTimeout(() => {
+        printControl.printMap('CurrentSize', 'myMap');
+      }, 1000); // Allow some time for the control to fully initialize
+    } else {
+      console.error('Map is not initialized or print control is missing');
+    }
   }
+
+
 }
