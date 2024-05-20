@@ -1,37 +1,74 @@
+/* General page styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+/* Custom toolbar styles */
+.custom-toolbar {
+  background-color: #fff;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Container styles */
+.container {
+  margin-top: 30px;
+}
+
+/* Card styles for icons */
+.card {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon styles */
 .img-size {
-  width: 90px;
-  height: 100px;
-  margin-right: 13px;
+  width: 120px;
+  height: 130px;
+  margin: 20px auto;
+  display: block;
+  transition: transform 0.3s, filter 0.3s;
 }
 
-.icon {
-  width: 30px;
-  height: auto;
-  background-color: transparent;
-  border: none;
-  margin-right: 5px;
-}
-
-.icon:hover {
+.img-size:hover {
   transform: scale(1.2);
-  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5)); /* Schatten hinzufügen */
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
-th:first-child {
-  position: sticky;
-  left: 0;
-  background-color: white; /* Hintergrundfarbe anpassen */
-  z-index: 1; /* Ebenen-Index erhöhen, um die Spalte über den Rest der Tabelle zu legen */
+/* Title styles for icons */
+.icon-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 10px;
 }
 
-thead {
-  position: sticky;
-  top: 0;
-  background-color: #fff; /* Hintergrundfarbe anpassen */
-  z-index: 1; /* Ebenen-Index erhöhen, um die Kopfzeile über den Rest der Tabelle zu legen */
+/* Link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  text-align: center;
 }
 
-.table tbody tr {
-  height: 10px;
-  overflow: hidden;
+/* Additional margin for icon containers */
+.icon-container {
+  margin-top: 20px;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.icon-container:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.3));
 }
