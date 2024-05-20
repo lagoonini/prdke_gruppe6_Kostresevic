@@ -22,6 +22,7 @@ import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 
 
+
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'createVehicle', component: VehicleCreateComponent},
