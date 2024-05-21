@@ -1,25 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VehicleCreateComponent } from './vehicle-create/vehicle-create.component';
-import {VehicleListComponent} from "./vehicle-list/vehicle-list.component";
-import {VehicleEditComponent} from "./vehicle-edit/vehicle-edit.component";
-import {RouteListComponent} from "./route-list/route-list.component";
-import {RouteEditComponent} from "./route-edit/route-edit.component";
-import {DriversLogListComponent} from "./drivers-log-list/drivers-log-list.component";
+import { VehicleListComponent } from "./vehicle-list/vehicle-list.component";
+import { VehicleEditComponent } from "./vehicle-edit/vehicle-edit.component";
+import { RouteListComponent } from "./route-list/route-list.component";
+import { RouteEditComponent } from "./route-edit/route-edit.component";
+import { DriversLogListComponent } from "./drivers-log-list/drivers-log-list.component";
 import { DriversLogViewComponent } from './drivers-log-view/drivers-log-view.component';
-import {InvoiceListComponent} from "./invoice-list/invoice-list.component";
-import {InvoiceViewComponent} from "./invoice-view/invoice-view.component";
+import { InvoiceListComponent } from "./invoice-list/invoice-list.component";
+import { InvoiceViewComponent } from "./invoice-view/invoice-view.component";
+import { LoginComponent } from "./login/login.component";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // default route
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'createVehicle', component: VehicleCreateComponent },
   { path: 'listVehicle', component: VehicleListComponent },
-  { path: 'editVehicle/:id', component: VehicleEditComponent},
-  { path: 'listRoute', component: RouteListComponent},
-  { path: 'editRoute/:id', component: RouteEditComponent},
-  { path: 'listDriverLogs', component: DriversLogListComponent},
-  { path: 'drivers-log-view/:id', component: DriversLogViewComponent},
+  { path: 'editVehicle/:id', component: VehicleEditComponent },
+  { path: 'listRoute', component: RouteListComponent },
+  { path: 'editRoute/:id', component: RouteEditComponent },
+  { path: 'listDriverLogs', component: DriversLogListComponent },
+  { path: 'drivers-log-view/:id', component: DriversLogViewComponent },
   { path: 'listInvoices', component: InvoiceListComponent },
   { path: 'invoice-view/:id', component: InvoiceViewComponent },
 ];

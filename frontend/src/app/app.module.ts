@@ -20,6 +20,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { DriversLogViewComponent } from './drivers-log-view/drivers-log-view.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -32,8 +33,9 @@ const routes: Routes = [
   {path: 'editRoute/:id', component: RouteEditComponent},
   {path: 'listDriverLogs', component: DriversLogListComponent},
   {path: 'drivers-log-view/:id', component: DriversLogViewComponent},
-  { path: 'listInvoices', component: InvoiceListComponent },
-  { path: 'invoice-view/:id', component: InvoiceViewComponent },
+  {path: 'listInvoices', component: InvoiceListComponent },
+  {path: 'invoice-view/:id', component: InvoiceViewComponent },
+  {path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
@@ -50,6 +52,7 @@ const routes: Routes = [
     DriversLogViewComponent,
     InvoiceListComponent,
     InvoiceViewComponent,
+    LoginComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
