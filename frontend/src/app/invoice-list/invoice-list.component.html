@@ -3,23 +3,23 @@
   <table class="table table-hover">
     <thead class="thead-light">
     <tr>
-      <th>Rechnungs-ID	</th>
-      <th>Erstellungsdatum</th>
-      <th>Strecke (km)</th>
-      <th>Summe</th>
+      <th>Rechnungs-ID</th>
       <th>Route-ID</th>
       <th>Fahrzeug-ID</th>
+      <th>Erstellt am</th>
+      <th>Strecke (km)</th>
+      <th>Summe</th>
       <th>Aktionen</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let invoice of invoices">
       <td>{{ invoice.invoiceId }}</td>
+      <td>{{ invoice.route.id }}</td>
+      <td>{{ invoice.route.vehicle.id }}</td>
       <td>{{ invoice.createdDate | date:'medium' }}</td>
       <td>{{ invoice.distance | number:'1.2-2' }}</td>
       <td>{{ invoice.totalCost | currency:'€' }}</td>
-      <td>{{ invoice.route.id }}</td>
-      <td>{{ invoice.route.vehicle.id }}</td>
       <td>
         <button class="btn btn-sm btn-outline-primary" (click)="viewInvoice(invoice.invoiceId)">Details</button>
       </td>

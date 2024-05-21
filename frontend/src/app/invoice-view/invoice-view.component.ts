@@ -260,7 +260,7 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
             const address = await this.getAddress(coord.latitude, coord.longitude);
             const marker = L.marker([latitudeOffset, longitudeOffset], {icon: customIcon})
                 .addTo(this.map)
-                .bindPopup(`Address: ${address}`);
+                .bindPopup(`Addresse: ${address}`);
             console.log('Marker added:', marker);
           }
         });
@@ -321,7 +321,7 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
         // Title
         pdf.setFontSize(18);
         if (this.invoiceDetails) {
-          pdf.text(`Rechnung Nr: ${this.invoiceDetails.invoiceId}`, 10, 10);
+          pdf.text(`Rechnungsbestätigung`, 10, 10);
         }
 
         // Add the table fields as text to the PDF
@@ -337,12 +337,12 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
             startY: 20,
             head: [['Rechnungsdetails', '']],
             body: [
-              [{ content: 'Invoice ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.invoiceId}`],
-              [{ content: 'Created Date', styles: { fontStyle: 'bold' } }, `${formattedDate}`],
-              [{ content: 'Distance', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.distance.toFixed(2)} km`],
-              [{ content: 'Total Cost', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.totalCost.toFixed(2)} EUR`],
-              [{ content: 'Route ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.route.id}`],
-              [{ content: 'Vehicle ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.route.vehicle.id}`],
+              [{ content: 'Rechnungs-ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.invoiceId}`],
+              [{ content: 'Route-ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.route.id}`],
+              [{ content: 'Fahrzeug-ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.route.vehicle.id}`],
+              [{ content: 'Erstellt am', styles: { fontStyle: 'bold' } }, `${formattedDate}`],
+              [{ content: 'Strecke (km)', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.distance.toFixed(2)} km`],
+              [{ content: 'Summe', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.totalCost.toFixed(2)} EUR`],
             ],
             theme: 'striped',
             styles: {

@@ -3,8 +3,8 @@
   <table class="table table-hover">
     <thead class="thead-light">
     <tr>
-      <th>Routen Nr.</th>
-      <th>Fahrzeug ID</th>
+      <th>Route-ID</th>
+      <th>Fahrzeug-ID</th>
       <th>Fahrzeugname</th>
       <th>Fahrzeugtyp</th>
       <th>Startpunkt</th>
@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let route of routes; let i = index">
-      <td>{{ i + 1 }}</td>
+      <td>{{ route.id }}</td>
       <td>{{ route.vehicle.id }}</td>
       <td>{{ route.vehicleName }}</td>
       <td>{{ route.vehicleType }}</td>

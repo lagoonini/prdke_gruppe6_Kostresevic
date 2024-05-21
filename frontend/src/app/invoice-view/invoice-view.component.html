@@ -1,31 +1,31 @@
 <div class="container">
-  <h1>Invoice Details</h1>
+  <h1>Rechnungsdetails</h1>
   <div *ngIf="invoiceDetails" id="pdf-content">
     <table class="table table-bordered">
       <tbody>
       <tr>
-        <th scope="row">Invoice ID:</th>
+        <th scope="row">Rechnungs-ID:</th>
         <td>{{ invoiceDetails.invoiceId }}</td>
       </tr>
       <tr>
-        <th scope="row">Created Date:</th>
-        <td>{{ invoiceDetails.createdDate | date:'medium' }}</td>
-      </tr>
-      <tr>
-        <th scope="row">Distance (km):</th>
-        <td>{{ invoiceDetails.distance | number:'1.2-2' }}</td>
-      </tr>
-      <tr>
-        <th scope="row">Total Cost:</th>
-        <td>{{ invoiceDetails.totalCost | currency:'EUR' }}</td>
-      </tr>
-      <tr>
-        <th scope="row">Route ID:</th>
+        <th scope="row">Route-ID:</th>
         <td>{{ invoiceDetails.route.id }}</td>
       </tr>
       <tr>
-        <th scope="row">Vehicle ID:</th>
+        <th scope="row">Fahrzeug-ID:</th>
         <td>{{ invoiceDetails.route.vehicle.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Erstellt am:</th>
+        <td>{{ invoiceDetails.createdDate | date:'medium' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Strecke (km):</th>
+        <td>{{ invoiceDetails.distance | number:'1.2-2' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Summe:</th>
+        <td>{{ invoiceDetails.totalCost | currency:'EUR' }}</td>
       </tr>
       </tbody>
     </table>

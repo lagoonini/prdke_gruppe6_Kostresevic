@@ -3,7 +3,7 @@
   <table class="table table-hover">
     <thead class="thead-light">
     <tr>
-      <th>#</th>
+      <th>Fahrzeug-ID</th>
       <th>Fahrzeugtyp</th>
       <th>Fahrzeugbezeichnung</th>
       <th>Sitzplätze</th>
@@ -15,7 +15,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let vehicle of vehicles; let i = index">
-      <td>{{ i + 1 }}</td>
+      <td>{{ vehicle.id }}</td>
       <td>{{ vehicle.vehicleType }}</td>
       <td>{{ vehicle.vehicleName }}</td>
       <td>{{ vehicle.seats }}</td>
