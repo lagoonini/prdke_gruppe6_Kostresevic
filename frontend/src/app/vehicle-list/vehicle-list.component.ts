@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 interface Vehicle {
   id: number;
@@ -30,7 +30,8 @@ export class VehicleListComponent implements OnInit {
   }
 
   loadVehicles(): void {
-    this.http.get<Vehicle[]>('http://localhost:8080/vehicles/').subscribe({
+    const providerId = localStorage.getItem('providerId');
+    this.http.get<Vehicle[]>(`http://localhost:8080/vehicles/?providerId=${providerId}`).subscribe({
       next: (data) => this.vehicles = data,
       error: (error) => console.error(error)
     });
@@ -41,8 +42,9 @@ export class VehicleListComponent implements OnInit {
   }
 
   deleteVehicle(id: number): void {
+    const providerId = localStorage.getItem('providerId');
     if (confirm('Are you sure you want to delete this vehicle?')) {
-      this.http.delete(`http://localhost:8080/vehicles/${id}`).subscribe({
+      this.http.delete(`http://localhost:8080/vehicles/${id}?providerId=${providerId}`).subscribe({
         next: () => {
           alert('Vehicle deleted successfully!');
           this.loadVehicles(); // Refresh the list after deletion

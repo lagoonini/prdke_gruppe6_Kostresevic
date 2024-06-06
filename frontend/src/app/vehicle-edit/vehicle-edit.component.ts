@@ -45,7 +45,8 @@ export class VehicleEditComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       const vehicleId = +id;
-      this.vehicle = await firstValueFrom(this.http.get<Vehicle>(`http://localhost:8080/vehicles/${vehicleId}`));
+      const providerId = localStorage.getItem('providerId');
+      this.vehicle = await firstValueFrom(this.http.get<Vehicle>(`http://localhost:8080/vehicles/${vehicleId}?providerId=${providerId}`));
       console.log("Fetched vehicle data:", this.vehicle);
 
       // After fetching, initialize the map to use the newly set coordinates
@@ -67,7 +68,8 @@ export class VehicleEditComponent implements OnInit {
 
         // Then proceed to update the vehicle as before
         if (this.vehicle.id) {
-          await firstValueFrom(this.http.put(`http://localhost:8080/vehicles/${this.vehicle.id}`, this.vehicle));
+          const providerId = localStorage.getItem('providerId');
+          await firstValueFrom(this.http.put(`http://localhost:8080/vehicles/${this.vehicle.id}?providerId=${providerId}`, this.vehicle));
           alert('Vehicle updated successfully!');
           this.router.navigate(['/listVehicle']); // Adjust the route as necessary
         }
@@ -81,7 +83,8 @@ export class VehicleEditComponent implements OnInit {
     const confirmed = confirm('Are you sure you want to delete this vehicle?');
     if (confirmed && this.vehicle.id) {
       try {
-        await firstValueFrom(this.http.delete(`http://localhost:8080/vehicles/${this.vehicle.id}`));
+        const providerId = localStorage.getItem('providerId');
+        await firstValueFrom(this.http.delete(`http://localhost:8080/vehicles/${this.vehicle.id}?providerId=${providerId}`));
         alert('Vehicle deleted successfully');
         this.router.navigate(['/vehicles']); // Adjust the route as necessary
       } catch (error) {

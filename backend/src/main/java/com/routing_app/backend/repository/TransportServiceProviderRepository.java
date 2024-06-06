@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @EnableJpaRepositories
 @Repository
-public interface TransportServiceProviderRepository extends JpaRepository<TransportServiceProvider, Integer> {
+public interface TransportServiceProviderRepository extends JpaRepository<TransportServiceProvider, Long> {
     Optional<TransportServiceProvider> findOneByEmailAndPassword(String email, String password);
     TransportServiceProvider findByEmail(String email);
 }

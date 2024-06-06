@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GeocodeService } from '../geocode-service/geocode.service'; // Ensure this path matches your project structure
 import { firstValueFrom } from 'rxjs';
 
-
 interface Vehicle {
   id?: any;
   vehicleType: any;
@@ -42,7 +41,8 @@ export class VehicleCreateComponent implements OnInit {
   }
 
   loadVehicles(): void {
-    this.http.get<Vehicle[]>('http://localhost:8080/vehicles/').subscribe({
+    const providerId = localStorage.getItem('providerId');
+    this.http.get<Vehicle[]>(`http://localhost:8080/vehicles/?providerId=${providerId}`).subscribe({
       next: (data) => this.vehicles = data,
       error: (error) => console.error(error)
     });
@@ -54,7 +54,7 @@ export class VehicleCreateComponent implements OnInit {
     this.vehicleName = vehicle.vehicleName;
     this.seats = vehicle.seats;
     this.wheelchairAccessible = vehicle.wheelchairAccessible;
-    this.startPoint= vehicle.startPoint;
+    this.startPoint = vehicle.startPoint;
     this.endPoint = vehicle.endPoint;
   }
 
@@ -80,8 +80,10 @@ export class VehicleCreateComponent implements OnInit {
         endPointLongitude: endPointCoords.longitude, // Set longitude
       };
 
+      const providerId = localStorage.getItem('providerId');
+
       if (vehicle.id) {
-        this.http.put(`http://localhost:8080/vehicles/${vehicle.id}`, vehicle, {
+        this.http.put(`http://localhost:8080/vehicles/${vehicle.id}?providerId=${providerId}`, vehicle, {
           headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         }).subscribe({
           next: () => {
@@ -91,7 +93,7 @@ export class VehicleCreateComponent implements OnInit {
           error: (error) => console.error(error)
         });
       } else {
-        this.http.post('http://localhost:8080/vehicles/', vehicle, {
+        this.http.post(`http://localhost:8080/vehicles/?providerId=${providerId}`, vehicle, {
           headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         }).subscribe({
           next: () => {
@@ -107,8 +109,9 @@ export class VehicleCreateComponent implements OnInit {
   }
 
   deleteVehicle(id: any): void {
+    const providerId = localStorage.getItem('providerId');
     if (confirm('Are you sure you want to delete this vehicle?')) {
-      this.http.delete(`http://localhost:8080/vehicles/${id}`).subscribe({
+      this.http.delete(`http://localhost:8080/vehicles/${id}?providerId=${providerId}`).subscribe({
         next: () => {
           alert('Vehicle deleted successfully!');
           this.resetForm();

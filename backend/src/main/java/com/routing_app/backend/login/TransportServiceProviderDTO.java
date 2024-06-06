@@ -1,7 +1,7 @@
 package com.routing_app.backend.login;
 
 public class TransportServiceProviderDTO {
-    private int id;
+    private Long id;
     private String companyName;
     private String companyAddress;
     private String email;
@@ -11,7 +11,7 @@ public class TransportServiceProviderDTO {
     public TransportServiceProviderDTO() {
     }
 
-    public TransportServiceProviderDTO(int id, String companyName, String companyAddress, String email, String password) {
+    public TransportServiceProviderDTO(Long id, String companyName, String companyAddress, String email, String password) {
         this.id = id;
         this.companyName = companyName;
         this.companyAddress = companyAddress;
@@ -20,7 +20,7 @@ public class TransportServiceProviderDTO {
     }
 
     // Getters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class TransportServiceProviderDTO {
     }
 
     // Setters
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

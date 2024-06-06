@@ -37,6 +37,10 @@ public class Route {
     @Column(nullable = false)
     private double endPointLongitude;
 
+    @ManyToOne
+    @JoinColumn(name = "provider_id", nullable = false)
+    private TransportServiceProvider transportServiceProvider;
+
     // Getters
     public Long getId() {
         return id;
@@ -78,6 +82,10 @@ public class Route {
         return endPointLongitude;
     }
 
+    public TransportServiceProvider getTransportServiceProvider() {
+        return transportServiceProvider;
+    }
+
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -117,5 +125,9 @@ public class Route {
 
     public void setEndPointLongitude(double endPointLongitude) {
         this.endPointLongitude = endPointLongitude;
+    }
+
+    public void setTransportServiceProvider(TransportServiceProvider transportServiceProvider) {
+        this.transportServiceProvider = transportServiceProvider;
     }
 }

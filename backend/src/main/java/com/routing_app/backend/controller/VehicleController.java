@@ -18,8 +18,9 @@ public class VehicleController {
 
     // Get all vehicles
     @GetMapping("/")
-    public List<Vehicle> getAllVehicles() {
-        return vehicleService.getAllVehicles();
+    public List<Vehicle> getAllVehicles(@RequestParam Long providerId) {
+        List<Vehicle> vehicles = vehicleService.getAllVehicles(providerId);
+        return vehicles;
     }
 
     // Get a single vehicle by ID
@@ -32,8 +33,9 @@ public class VehicleController {
 
     // Create a new vehicle
     @PostMapping("/")
-    public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.saveVehicle(vehicle);
+    public Vehicle addVehicle(@RequestBody Vehicle vehicle, @RequestParam Long providerId) {
+        Vehicle newVehicle = vehicleService.saveVehicle(vehicle, providerId);
+        return newVehicle;
     }
 
     // Update an existing vehicle

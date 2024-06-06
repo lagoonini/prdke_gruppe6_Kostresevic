@@ -16,7 +16,7 @@ import java.util.Optional;
 public class TransportServiceProviderService {
 
     @Autowired
-    private TransportServiceProviderRepository transportServiceProviderRepo;
+    private TransportServiceProviderRepository transportServiceProviderRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -31,7 +31,7 @@ public class TransportServiceProviderService {
         transportServiceProvider.setPassword(passwordEncoder.encode(transportServiceProviderDTO.getPassword()));
 
         // Save the TransportServiceProvider entity
-        TransportServiceProvider savedTransportServiceProvider = transportServiceProviderRepo.save(transportServiceProvider);
+        TransportServiceProvider savedTransportServiceProvider = transportServiceProviderRepository.save(transportServiceProvider);
 
         // Convert the saved entity back to a DTO to return
         TransportServiceProviderDTO savedTransportServiceProviderDTO = new TransportServiceProviderDTO();
@@ -46,15 +46,15 @@ public class TransportServiceProviderService {
 
     public LoginMessage loginTransportServiceProvider(LoginDTO loginDTO) {
         String msg = "";
-        TransportServiceProvider transportServiceProvider = transportServiceProviderRepo.findByEmail(loginDTO.getEmail());
+        TransportServiceProvider transportServiceProvider = transportServiceProviderRepository.findByEmail(loginDTO.getEmail());
         if (transportServiceProvider != null) {
             String password = loginDTO.getPassword();
             String encodedPassword = transportServiceProvider.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
             if (isPwdRight) {
-                Optional<TransportServiceProvider> transportServiceProviderOptional = transportServiceProviderRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
+                Optional<TransportServiceProvider> transportServiceProviderOptional = transportServiceProviderRepository.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
                 if (transportServiceProviderOptional.isPresent()) {
-                    return new LoginMessage("Login Success", true);
+                    return new LoginMessage("Login Success", true, transportServiceProvider.getId());
                 } else {
                     return new LoginMessage("Login Failed", false);
                 }

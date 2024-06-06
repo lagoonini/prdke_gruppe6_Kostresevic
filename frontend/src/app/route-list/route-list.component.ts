@@ -1,5 +1,3 @@
-// route-list.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -39,7 +37,8 @@ export class RouteListComponent implements OnInit {
   }
 
   loadRoutes(): void {
-    this.http.get<Route[]>('http://localhost:8080/routes').subscribe({
+    const providerId = localStorage.getItem('providerId');
+    this.http.get<Route[]>(`http://localhost:8080/routes?providerId=${providerId}`).subscribe({
       next: (data) => this.routes = data,
       error: (error) => console.error(error)
     });
@@ -50,8 +49,9 @@ export class RouteListComponent implements OnInit {
   }
 
   deleteRoute(id: number): void {
+    const providerId = localStorage.getItem('providerId');
     if (confirm('Are you sure you want to delete this route?')) {
-      this.http.delete(`http://localhost:8080/routes/${id}`).subscribe({
+      this.http.delete(`http://localhost:8080/routes/${id}?providerId=${providerId}`).subscribe({
         next: () => {
           alert('Route deleted successfully!');
           this.loadRoutes(); // Refresh the list after deletion

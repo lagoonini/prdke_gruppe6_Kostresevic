@@ -40,6 +40,11 @@ public class Vehicle {
     @Column(nullable = false)
     private double endPointLongitude; // Added field
 
+
+    @ManyToOne
+    @JoinColumn(name = "provider_id", nullable = false)
+    private TransportServiceProvider transportServiceProvider;
+
     // Getters
     public Long getId() { return id; }
     public String getVehicleType() { return vehicleType; }
@@ -53,6 +58,10 @@ public class Vehicle {
     public double getEndPointLatitude() { return endPointLatitude; } // Getter
     public double getEndPointLongitude() { return endPointLongitude; } // Getter
 
+    public TransportServiceProvider getTransportServiceProvider() {
+        return transportServiceProvider;
+    }
+
     // Setters
     public void setId(Long id) { this.id = id; }
     public void setVehicleType(String vehicleType) { this.vehicleType = vehicleType; }
@@ -65,4 +74,7 @@ public class Vehicle {
     public void setEndPoint(String endPoint) { this.endPoint = endPoint; }
     public void setEndPointLatitude(double endPointLatitude) { this.endPointLatitude = endPointLatitude; } // Setter
     public void setEndPointLongitude(double endPointLongitude) { this.endPointLongitude = endPointLongitude; } // Setter
+    public void setTransportServiceProvider(TransportServiceProvider transportServiceProvider) {
+        this.transportServiceProvider = transportServiceProvider;
+    }
 }

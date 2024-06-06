@@ -4,13 +4,14 @@ import com.routing_app.backend.model.Route;
 import com.routing_app.backend.model.Vehicle;
 import com.routing_app.backend.repository.RouteRepository;
 import com.routing_app.backend.repository.VehicleRepository;
+import com.routing_app.backend.model.TransportServiceProvider;
+import com.routing_app.backend.repository.TransportServiceProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class RouteService {
@@ -19,10 +20,12 @@ public class RouteService {
     private RouteRepository routeRepository;
     @Autowired
     private VehicleRepository vehicleRepository;
+    @Autowired
+    private TransportServiceProviderRepository transportServiceProviderRepository;
 
     // Retrieve all routes
-    public List<Route> getAllRoutes() {
-        return routeRepository.findAll();
+    public List<Route> getAllRoutes(Long providerId) {
+        return routeRepository.findByTransportServiceProviderId(providerId);
     }
 
     // Retrieve a route by its ID
@@ -31,7 +34,13 @@ public class RouteService {
     }
 
     // Save a new route
-    public Route saveRoute(Route route) {
+    public Route saveRoute(Route route, Long providerId) {
+        TransportServiceProvider provider = transportServiceProviderRepository.findById(providerId)
+                .orElseThrow(() -> new RuntimeException("Provider not found"));
+        route.setTransportServiceProvider(provider);
+        Vehicle vehicle = vehicleRepository.findById(route.getVehicle().getId())
+                .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+        route.setVehicle(vehicle);
         return routeRepository.save(route);
     }
 

@@ -24,6 +24,7 @@ export class LoginComponent {
         if (resultData.message === 'Email not exists') {
           alert('Email not exists');
         } else if (resultData.message === 'Login Success') {
+          localStorage.setItem('providerId', resultData.providerId); // Store the providerId
           this.router.navigateByUrl('/dashboard');
         } else {
           alert('Incorrect Email and Password do not match');
@@ -34,5 +35,5 @@ export class LoginComponent {
         alert('An error occurred during login. Please try again later.');
       }
     );
-  }
+}
 }

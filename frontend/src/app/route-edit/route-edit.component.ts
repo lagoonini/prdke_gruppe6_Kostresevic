@@ -21,7 +21,6 @@ interface Route {
   endPointLongitude?: number;
 }
 
-
 @Component({
   selector: 'app-route-edit',
   templateUrl: './route-edit.component.html',
@@ -50,7 +49,8 @@ export class RouteEditComponent implements OnInit, AfterViewInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       const routeId = +id;
-      this.routeDetails = await firstValueFrom(this.http.get<Route>(`http://localhost:8080/routes/${routeId}`));
+      const providerId = localStorage.getItem('providerId');
+      this.routeDetails = await firstValueFrom(this.http.get<Route>(`http://localhost:8080/routes/${routeId}?providerId=${providerId}`));
       this.initMap();
     }
   }
@@ -141,7 +141,8 @@ export class RouteEditComponent implements OnInit, AfterViewInit {
       };
 
       // Send a PUT request to update the route
-      await firstValueFrom(this.http.put(`http://localhost:8080/routes/${this.routeDetails.id}`, updatedRouteDetails));
+      const providerId = localStorage.getItem('providerId');
+      await firstValueFrom(this.http.put(`http://localhost:8080/routes/${this.routeDetails.id}?providerId=${providerId}`, updatedRouteDetails));
 
       // Optionally, if the backend doesn't automatically update the vehicle based on route changes,
       // you might need to send a separate update request for the vehicle.
@@ -153,7 +154,6 @@ export class RouteEditComponent implements OnInit, AfterViewInit {
       console.error('Failed to update route', error);
     }
   }
-
 
   goBack(): void {
     this.router.navigate(['/listRoute']); // Adjust as needed

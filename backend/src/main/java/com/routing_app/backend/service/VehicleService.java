@@ -1,15 +1,16 @@
 package com.routing_app.backend.service;
 
 import com.routing_app.backend.model.Route;
+import com.routing_app.backend.model.TransportServiceProvider;
 import com.routing_app.backend.model.Vehicle;
 import com.routing_app.backend.repository.RouteRepository;
+import com.routing_app.backend.repository.TransportServiceProviderRepository;
 import com.routing_app.backend.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 import java.util.Optional;
 
 @Service
@@ -19,10 +20,12 @@ public class VehicleService {
     private VehicleRepository vehicleRepository;
     @Autowired
     private RouteRepository routeRepository;
+    @Autowired
+    private TransportServiceProviderRepository transportServiceProviderRepository;
 
     // Retrieve all vehicles from the database
-    public List<Vehicle> getAllVehicles() {
-        return vehicleRepository.findAll();
+    public List<Vehicle> getAllVehicles(Long providerId) {
+        return vehicleRepository.findByTransportServiceProviderId(providerId);
     }
 
     // Retrieve a vehicle by its ID
@@ -32,19 +35,29 @@ public class VehicleService {
 
     // Save a new vehicle or update an existing one
     @Transactional
-    public Vehicle saveVehicle(Vehicle vehicle) {
+    public Vehicle saveVehicle(Vehicle vehicle, Long providerId) {
+        TransportServiceProvider provider = transportServiceProviderRepository.findById(providerId)
+                .orElseThrow(() -> new RuntimeException("Provider not found"));
+        vehicle.setTransportServiceProvider(provider);
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
-        Route route = new Route();
-        route.setVehicle(savedVehicle); // Now it's correctly associating with the saved vehicle, which has an ID
-        route.setVehicleName(savedVehicle.getVehicleName());
-        route.setVehicleType(savedVehicle.getVehicleType());
-        route.setStartPoint(savedVehicle.getStartPoint());
-        route.setStartPointLatitude(savedVehicle.getStartPointLatitude());
-        route.setStartPointLongitude(savedVehicle.getStartPointLongitude());
-        route.setEndPoint(savedVehicle.getEndPoint());
-        route.setEndPointLatitude(savedVehicle.getEndPointLatitude());
-        route.setEndPointLongitude(savedVehicle.getEndPointLongitude());
-        routeRepository.save(route); // This should now work as expected
+
+        // Check if a route already exists for this vehicle
+        Optional<Route> existingRoute = routeRepository.findByVehicleId(savedVehicle.getId());
+        if (!existingRoute.isPresent()) {
+            // Create and save associated route if it doesn't exist
+            Route route = new Route();
+            route.setVehicle(savedVehicle);
+            route.setTransportServiceProvider(provider); // Set the provider for the route
+            route.setVehicleName(savedVehicle.getVehicleName());
+            route.setVehicleType(savedVehicle.getVehicleType());
+            route.setStartPoint(savedVehicle.getStartPoint());
+            route.setStartPointLatitude(savedVehicle.getStartPointLatitude());
+            route.setStartPointLongitude(savedVehicle.getStartPointLongitude());
+            route.setEndPoint(savedVehicle.getEndPoint());
+            route.setEndPointLatitude(savedVehicle.getEndPointLatitude());
+            route.setEndPointLongitude(savedVehicle.getEndPointLongitude());
+            routeRepository.save(route);
+        }
 
         return savedVehicle; // Return the saved vehicle
     }
@@ -94,6 +107,4 @@ public class VehicleService {
                     return true;
                 }).orElse(false);
     }
-
 }
-

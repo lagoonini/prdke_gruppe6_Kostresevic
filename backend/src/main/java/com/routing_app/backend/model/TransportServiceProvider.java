@@ -7,7 +7,7 @@ public class TransportServiceProvider {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", length = 45)
-    private int id;
+    private Long id;
 
     @Column(name="company_name", length = 255)
     private String companyName;
@@ -26,11 +26,11 @@ public class TransportServiceProvider {
     }
 
     // Getters and Setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

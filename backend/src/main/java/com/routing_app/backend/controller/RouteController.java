@@ -16,8 +16,8 @@ public class RouteController {
     private RouteService routeService;
 
     @GetMapping
-    public List<Route> getAllRoutes() {
-        return routeService.getAllRoutes();
+    public List<Route> getAllRoutes(@RequestParam Long providerId) {
+        return routeService.getAllRoutes(providerId);
     }
 
     @GetMapping("/{id}")
@@ -28,8 +28,8 @@ public class RouteController {
     }
 
     @PostMapping
-    public Route createRoute(@RequestBody Route route) {
-        return routeService.saveRoute(route);
+    public Route createRoute(@RequestBody Route route, @RequestParam Long providerId) {
+        return routeService.saveRoute(route, providerId);
     }
 
     @PutMapping("/{id}")

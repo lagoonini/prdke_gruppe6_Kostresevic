@@ -2,15 +2,22 @@ package com.routing_app.backend.login;
 
 public class LoginMessage {
     private String message;
-    private Boolean status;
+    private boolean success;
+    private Long providerId;
 
     // Constructors
     public LoginMessage() {
     }
 
-    public LoginMessage(String message, Boolean status) {
+    public LoginMessage(String message, boolean success) {
         this.message = message;
-        this.status = status;
+        this.success = success;
+    }
+
+    public LoginMessage(String message, boolean success, Long providerId) {
+        this.message = message;
+        this.success = success;
+        this.providerId = providerId;
     }
 
     // Getters
@@ -18,8 +25,12 @@ public class LoginMessage {
         return message;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public Long getProviderId() {
+        return providerId;
     }
 
     // Setters
@@ -27,9 +38,11 @@ public class LoginMessage {
         this.message = message;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setProviderId(Long providerId) {
+        this.providerId = providerId;
     }
 }
-
-
