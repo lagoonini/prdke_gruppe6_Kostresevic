@@ -41,9 +41,10 @@ export class InvoiceListComponent implements OnInit {
   }
 
   loadInvoices(): void {
-    this.http.get<Invoice[]>('http://localhost:8080/invoice/').subscribe({
+    const providerId = localStorage.getItem('providerId');
+    this.http.get<Invoice[]>(`http://localhost:8080/invoice/?providerId=${providerId}`).subscribe({
       next: (data) => this.invoices = data,
-      error: (error) => console.error('Error fetching invoices:', error)
+      error: (error) => console.error(error)
     });
   }
 

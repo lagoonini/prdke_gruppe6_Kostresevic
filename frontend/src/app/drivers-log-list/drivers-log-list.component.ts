@@ -1,6 +1,5 @@
-
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Router } from '@angular/router';
 
 interface Vehicle {
@@ -38,9 +37,10 @@ export class DriversLogListComponent implements OnInit {
   }
 
   loadLogs(): void {
-    this.http.get<DriversLog[]>('http://localhost:8080/drivers-log/').subscribe({
+    const providerId = localStorage.getItem('providerId');
+    this.http.get<DriversLog[]>(`http://localhost:8080/drivers-log/?providerId=${providerId}`).subscribe({
       next: (data) => this.logs = data,
-      error: (error) => console.error('Error fetching drivers logs:', error)
+      error: (error) => console.error(error)
     });
   }
 
@@ -49,8 +49,9 @@ export class DriversLogListComponent implements OnInit {
   }
 
   deleteLog(id: number): void {
+    const providerId = localStorage.getItem('providerId');
     if (confirm('Are you sure you want to delete this log entry?')) {
-      this.http.delete(`http://localhost:8080/drivers-log/${id}`).subscribe({
+      this.http.delete(`http://localhost:8080/drivers-log/${id}?providerId=${providerId}`).subscribe({
         next: () => {
           alert('Drivers log deleted successfully!');
           this.loadLogs(); // Refresh the list after deletion
@@ -65,12 +66,24 @@ export class DriversLogListComponent implements OnInit {
   }
 
   generateInvoice(id: number): void {
-    this.http.post(`http://localhost:8080/drivers-log/${id}/generate-invoice`, {}).subscribe({
+    const providerId = localStorage.getItem('providerId');
+    this.http.post(`http://localhost:8080/drivers-log/${id}/generate-invoice?providerId=${providerId}`, {}).subscribe({
       next: () => {
         alert('Invoice generated successfully!');
         this.loadLogs(); // Refresh the list after invoice generation
       },
       error: (error) => console.error('Error generating invoice:', error)
+    });
+  }
+
+  createMockDriversLogData(): void {
+    const providerId = localStorage.getItem('providerId');
+    this.http.post(`http://localhost:8080/drivers-log/mock?providerId=${providerId}`, {}).subscribe({
+      next: (mockLogData) => {
+        alert('Mock Drivers Log created successfully!');
+        this.loadLogs(); // Refresh the list to include the new mock log
+      },
+      error: (error) => console.error('Error creating mock drivers log:', error)
     });
   }
 }

@@ -19,12 +19,20 @@ public class DriversLogData {
     @JoinColumn(name = "route_id")
     private Route route;
 
+    @ManyToOne
+    @JoinColumn(name = "provider_id", nullable = false)
+    private TransportServiceProvider transportServiceProvider;
+
     @Column(name = "invoice_status", nullable = false)
     private String invoiceStatus = "Nicht ausgestellt"; // Default status
 
     // Getters and setters
     public Long getId() {
         return id;
+    }
+
+    public TransportServiceProvider getTransportServiceProvider() {
+        return transportServiceProvider;
     }
 
     public void setId(Long id) {
@@ -53,5 +61,9 @@ public class DriversLogData {
 
     public void setInvoiceStatus(String invoiceStatus) {
         this.invoiceStatus = invoiceStatus;
+    }
+
+    public void setTransportServiceProvider(TransportServiceProvider transportServiceProvider) {
+        this.transportServiceProvider = transportServiceProvider;
     }
 }

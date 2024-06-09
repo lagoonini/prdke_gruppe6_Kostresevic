@@ -82,14 +82,15 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
 
   loadInvoiceDetails(): void {
     if (this.invoiceId) { // Only make the HTTP request if invoiceId is not 0
-      this.invoice$ = this.http.get<Invoice>(`http://localhost:8080/invoice/${this.invoiceId}`).pipe(
-          tap(invoice => {
-            this.invoiceDetails = invoice;
-            console.log('Invoice details:', this.invoiceDetails);
-            if (this.invoiceDetails) {
-              this.initMap();
-            }
-          })
+      const providerId = localStorage.getItem('providerId');
+      this.invoice$ = this.http.get<Invoice>(`http://localhost:8080/invoice/${this.invoiceId}?providerId=${providerId}`).pipe(
+        tap(invoice => {
+          this.invoiceDetails = invoice;
+          console.log('Invoice details:', this.invoiceDetails);
+          if (this.invoiceDetails) {
+            this.initMap();
+          }
+        })
       );
       this.invoice$.subscribe();
     }

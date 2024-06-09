@@ -20,8 +20,8 @@ public class DriversLogDataController {
 
     // Endpoint to create a new DriversLogData
     @PostMapping("/")
-    public Mono<ResponseEntity<DriversLogData>> createDriversLogData(@RequestBody DriversLogData logData) {
-        return driversLogDataService.saveDriversLogData(logData)
+    public Mono<ResponseEntity<DriversLogData>> createDriversLogData(@RequestParam Long providerId, @RequestBody DriversLogData logData) {
+        return driversLogDataService.saveDriversLogData(logData, providerId)
                 .map(savedLogData -> ResponseEntity.ok(savedLogData));
     }
 
@@ -35,18 +35,18 @@ public class DriversLogDataController {
 
     // Endpoint to retrieve all DriversLogData
     @GetMapping("/")
-    public Flux<DriversLogData> getAllDriversLogData() {
-        return driversLogDataService.findAllDriversLogData();
+    public Flux<DriversLogData> getAllDriversLogData(@RequestParam Long providerId) {
+        return driversLogDataService.findAllDriversLogData(providerId);
     }
 
     // Endpoint to update a specific DriversLogData
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<DriversLogData>> updateDriversLogData(@PathVariable Long id, @RequestBody DriversLogData logData) {
+    public Mono<ResponseEntity<DriversLogData>> updateDriversLogData(@PathVariable Long id, @RequestParam Long providerId, @RequestBody DriversLogData logData) {
         return driversLogDataService.findDriversLogDataById(id)
                 .flatMap(storedLogData -> {
                     storedLogData.setAddresses(logData.getAddresses());
                     storedLogData.setRoute(logData.getRoute());
-                    return driversLogDataService.saveDriversLogData(storedLogData);
+                    return driversLogDataService.saveDriversLogData(storedLogData, providerId);
                 })
                 .map(updatedLogData -> ResponseEntity.ok(updatedLogData))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
@@ -61,14 +61,15 @@ public class DriversLogDataController {
 
     // Endpoint to create mock DriversLogData including route's start and endpoint
     @PostMapping("/mock")
-    public Mono<ResponseEntity<DriversLogData>> createMockDriversLogData() {
-        return driversLogDataService.createMockDriversLogData()
+    public Mono<ResponseEntity<DriversLogData>> createMockDriversLogData(@RequestParam Long providerId) {
+        return driversLogDataService.createMockDriversLogData(providerId)
                 .map(mockLogData -> ResponseEntity.ok(mockLogData));
     }
 
+    // Endpoint to generate an invoice from DriversLogData
     @PostMapping("/{id}/generate-invoice")
-    public Mono<ResponseEntity<Invoice>> generateInvoiceFromDriversLog(@PathVariable Long id) {
-        return invoiceService.createInvoiceFromLogData(id)
+    public Mono<ResponseEntity<Invoice>> generateInvoiceFromDriversLog(@PathVariable Long id, @RequestParam Long providerId) {
+        return invoiceService.createInvoiceFromLogData(id, providerId)
                 .map(invoice -> ResponseEntity.ok(invoice))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }

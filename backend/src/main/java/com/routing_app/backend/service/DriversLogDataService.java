@@ -2,8 +2,10 @@ package com.routing_app.backend.service;
 
 import com.routing_app.backend.model.DriversLogData;
 import com.routing_app.backend.model.Route;
+import com.routing_app.backend.model.TransportServiceProvider;
 import com.routing_app.backend.repository.DriversLogDataRepository;
 import com.routing_app.backend.repository.RouteRepository;
+import com.routing_app.backend.repository.TransportServiceProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -21,7 +23,13 @@ public class DriversLogDataService {
     @Autowired
     private RouteRepository routeRepository;
 
-    public Mono<DriversLogData> saveDriversLogData(DriversLogData logData) {
+    @Autowired
+    private TransportServiceProviderRepository transportServiceProviderRepository;
+
+    public Mono<DriversLogData> saveDriversLogData(DriversLogData logData, Long providerId) {
+        TransportServiceProvider provider = transportServiceProviderRepository.findById(providerId)
+                .orElseThrow(() -> new RuntimeException("Provider not found"));
+        logData.setTransportServiceProvider(provider);
         return Mono.just(driversLogDataRepository.save(logData));
     }
 
@@ -30,8 +38,9 @@ public class DriversLogDataService {
                 .orElseThrow(() -> new RuntimeException("DriversLogData not found")));
     }
 
-    public Flux<DriversLogData> findAllDriversLogData() {
-        return Flux.fromIterable(driversLogDataRepository.findAll());
+    public Flux<DriversLogData> findAllDriversLogData(Long providerId) {
+        List<DriversLogData> logs = driversLogDataRepository.findByTransportServiceProviderId(providerId);
+        return Flux.fromIterable(logs);
     }
 
     public Mono<Void> deleteDriversLogData(Long id) {
@@ -39,7 +48,7 @@ public class DriversLogDataService {
     }
 
     // Method to create and return mock DriversLogData
-    public Mono<DriversLogData> createMockDriversLogData() {
+    public Mono<DriversLogData> createMockDriversLogData(Long providerId) {
         return Mono.fromSupplier(() -> {
             Route mockRoute = routeRepository.findById(1L).orElseGet(() -> {
                 Route newRoute = new Route();
@@ -51,6 +60,9 @@ public class DriversLogDataService {
                 newRoute.setEndPoint("789 Mock End Point, Test Town");
                 newRoute.setEndPointLatitude(34.1522);
                 newRoute.setEndPointLongitude(-118.3437);
+                TransportServiceProvider provider = transportServiceProviderRepository.findById(providerId)
+                        .orElseThrow(() -> new RuntimeException("Provider not found"));
+                newRoute.setTransportServiceProvider(provider);
                 return routeRepository.save(newRoute);
             });
 
@@ -63,7 +75,7 @@ public class DriversLogDataService {
             mockLogData.setAddresses(addresses);
             mockLogData.setRoute(mockRoute);
 
-            return saveDriversLogData(mockLogData).block(); // Use block() cautiously
+            return saveDriversLogData(mockLogData, providerId).block(); // Pass the providerId here
         });
     }
 }

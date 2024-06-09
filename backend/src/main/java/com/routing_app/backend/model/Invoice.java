@@ -31,6 +31,10 @@ public class Invoice {
     @CollectionTable(name = "invoice_coordinates", joinColumns = @JoinColumn(name = "invoice_id"))
     private List<Coordinate> coordinates = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "provider_id", nullable = false)
+    private TransportServiceProvider transportServiceProvider;
+
     // Constructors, getters, and setters
     public Invoice() {
     }
@@ -49,6 +53,10 @@ public class Invoice {
 
     public Double getDistance() {
         return distance;
+    }
+
+    public TransportServiceProvider getTransportServiceProvider() {
+        return transportServiceProvider;
     }
 
     public void setDistance(Double distance) {
@@ -77,6 +85,10 @@ public class Invoice {
 
     public void setCoordinates(List<Coordinate> coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public void setTransportServiceProvider(TransportServiceProvider transportServiceProvider) {
+        this.transportServiceProvider = transportServiceProvider;
     }
 }
 
