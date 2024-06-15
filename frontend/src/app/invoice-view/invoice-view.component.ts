@@ -20,6 +20,11 @@ declare module 'jspdf' {
   }
 }
 
+interface TransportServiceProvider {
+  id: number;
+  companyName: string;
+}
+
 
 interface Coordinate {
   latitude: number;
@@ -44,6 +49,8 @@ interface Invoice {
   totalCost: number;
   route: Route;
   coordinates: Coordinate[];
+  addresses: string[];
+  transportServiceProvider: TransportServiceProvider;
 }
 
 @Component({
@@ -62,6 +69,10 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
 
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
+  }
+
+  trackByFn(index: number, item: any): any {
+    return index;
   }
 
   ngOnInit(): void {

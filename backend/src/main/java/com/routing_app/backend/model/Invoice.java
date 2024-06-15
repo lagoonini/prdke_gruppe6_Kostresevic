@@ -31,6 +31,11 @@ public class Invoice {
     @CollectionTable(name = "invoice_coordinates", joinColumns = @JoinColumn(name = "invoice_id"))
     private List<Coordinate> coordinates = new ArrayList<>();
 
+    @ElementCollection
+    @CollectionTable(name = "invoice_addresses", joinColumns = @JoinColumn(name = "invoice_id"))
+    @Column(name = "address")
+    private List<String> addresses = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "provider_id", nullable = false)
     private TransportServiceProvider transportServiceProvider;
@@ -85,6 +90,14 @@ public class Invoice {
 
     public void setCoordinates(List<Coordinate> coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public List<String> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<String> addresses) {
+        this.addresses = addresses;
     }
 
     public void setTransportServiceProvider(TransportServiceProvider transportServiceProvider) {

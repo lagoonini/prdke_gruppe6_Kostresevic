@@ -4,6 +4,10 @@
     <table class="table table-bordered">
       <tbody>
       <tr>
+        <th scope="row">Dienstanbieter:</th>
+        <td>{{ invoiceDetails.transportServiceProvider.companyName }}</td>
+      </tr>
+      <tr>
         <th scope="row">Rechnungs-ID:</th>
         <td>{{ invoiceDetails.invoiceId }}</td>
       </tr>
@@ -24,6 +28,16 @@
         <td>{{ invoiceDetails.distance | number:'1.2-2' }}</td>
       </tr>
       <tr>
+        <th scope="row">Adressen:</th>
+        <td>
+          <ul>
+            <li *ngFor="let address of invoiceDetails.addresses; let i = index; let len = count; trackBy: trackByFn">
+              {{ invoiceDetails.addresses[len - i - 1] }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
         <th scope="row">Summe:</th>
         <td>{{ invoiceDetails.totalCost | currency:'EUR' }}</td>
       </tr>
@@ -34,8 +48,21 @@
   <div *ngIf="!invoiceDetails">
     <p>Loading invoice details...</p>
   </div>
+
+  <div class="button-group">
+    <button class="btn btn-primary" (click)="captureMap()">Für Export vorbereiten</button>
+    <button class="btn btn-success" (click)="exportPageAsPDF()">Als PDF herunterladen</button>
+  </div>
 </div>
 
-<button (click)="captureMap()">Download as PDF</button>
-<button (click)="exportPageAsPDF()">Download as PDF</button>
+<style>
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
 
+  .btn {
+    margin-left: 10px;
+  }
+</style>
