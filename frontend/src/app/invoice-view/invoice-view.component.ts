@@ -349,6 +349,7 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
             startY: 20,
             head: [['Rechnungsdetails', '']],
             body: [
+              [{ content: 'Dienstanbieter', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.transportServiceProvider.companyName}`],
               [{ content: 'Rechnungs-ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.invoiceId}`],
               [{ content: 'Route-ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.route.id}`],
               [{ content: 'Fahrzeug-ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.route.vehicle.id}`],

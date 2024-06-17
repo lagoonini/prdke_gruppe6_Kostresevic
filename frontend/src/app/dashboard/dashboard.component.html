@@ -1,5 +1,6 @@
 <mat-toolbar class="custom-toolbar">
   <span>Willkommen</span>
+  <span *ngIf="transportServiceProvider">, {{ transportServiceProvider.companyName }}</span>
 </mat-toolbar>
 
 <div class="container mt-4">

@@ -24,6 +24,21 @@ public class TransportServiceProviderController {
     @Autowired
     private TransportServiceProviderRepository transportServiceProviderRepository;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TransportServiceProviderDTO> getTransportServiceProviderById(@PathVariable Long id) {
+        TransportServiceProvider provider = transportServiceProviderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Provider not found"));
+        TransportServiceProviderDTO dto = new TransportServiceProviderDTO(
+                provider.getId(),
+                provider.getCompanyName(),
+                provider.getCompanyAddress(),
+                provider.getEmail(),
+                null // Do not include the password in the DTO
+        );
+        return ResponseEntity.ok(dto);
+    }
+
+
     @PostMapping(path = "/save")
     public ResponseEntity<TransportServiceProviderDTO> saveTransportServiceProvider(@RequestBody TransportServiceProviderDTO transportServiceProviderDTO) {
         TransportServiceProviderDTO savedTransportServiceProviderDTO = transportServiceProviderService.addTransportServiceProvider(transportServiceProviderDTO);
