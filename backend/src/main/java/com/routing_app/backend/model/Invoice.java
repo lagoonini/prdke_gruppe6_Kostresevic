@@ -23,7 +23,7 @@ public class Invoice {
     @Column(updatable = false)
     private Date createdDate;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
     private Route route;
 
