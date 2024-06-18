@@ -344,6 +344,9 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
             month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true
           });
 
+          // Format the addresses as a string
+          const formattedAddresses = this.invoiceDetails.addresses.join('\n');
+
           // Using autoTable to add a table to the PDF
           autoTable(pdf, {
             startY: 20,
@@ -355,6 +358,7 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
               [{ content: 'Fahrzeug-ID', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.route.vehicle.id}`],
               [{ content: 'Erstellt am', styles: { fontStyle: 'bold' } }, `${formattedDate}`],
               [{ content: 'Strecke (km)', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.distance.toFixed(2)} km`],
+              [{ content: 'Adressen', styles: { fontStyle: 'bold' } }, formattedAddresses],
               [{ content: 'Summe', styles: { fontStyle: 'bold' } }, `${this.invoiceDetails.totalCost.toFixed(2)} EUR`],
             ],
             theme: 'striped',

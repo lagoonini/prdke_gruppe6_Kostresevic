@@ -31,8 +31,8 @@
         <th scope="row">Adressen:</th>
         <td>
           <ul>
-            <li *ngFor="let address of invoiceDetails.addresses; let i = index; let len = count; trackBy: trackByFn">
-              {{ invoiceDetails.addresses[len - i - 1] }}
+            <li *ngFor="let address of invoiceDetails.addresses; trackBy: trackByFn">
+              {{ address }}
             </li>
           </ul>
         </td>

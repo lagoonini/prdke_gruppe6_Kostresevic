@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.AbstractMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,25 +45,46 @@ public class InvoiceService {
     public Mono<Invoice> createInvoiceFromLogData(Long logDataId, Long providerId) {
         return driversLogDataService.findDriversLogDataById(logDataId)
                 .flatMap(logData -> {
+                    // Ensure addresses are in the correct order
                     List<String> addresses = logData.getAddresses();
-                    return Flux.fromIterable(addresses)
-                            .flatMap(address -> geocodingService.getCoordinates(address)
-                                    .map(coordinate -> new AbstractMap.SimpleEntry<>(coordinate, address)))
+
+                    // Assign indices to each address
+                    List<Map.Entry<Integer, String>> indexedAddresses = new ArrayList<>();
+                    for (int i = 0; i < addresses.size(); i++) {
+                        indexedAddresses.add(new AbstractMap.SimpleEntry<>(i, addresses.get(i)));
+                    }
+
+                    // Geocode addresses and pair them with their coordinates
+                    return Flux.fromIterable(indexedAddresses)
+                            .flatMap(entry -> geocodingService.getCoordinates(entry.getValue())
+                                    .map(coordinate -> new AbstractMap.SimpleEntry<>(entry.getKey(), new AbstractMap.SimpleEntry<>(coordinate, entry.getValue()))))
                             .collectList()
                             .flatMap(coordinateAddressPairs -> {
+                                // Sort by the original indices to maintain the order
+                                coordinateAddressPairs.sort(Comparator.comparingInt(Map.Entry::getKey));
+
+                                // Extract coordinates and addresses from pairs
                                 List<Coordinate> coordinates = coordinateAddressPairs.stream()
-                                        .map(AbstractMap.SimpleEntry::getKey)
+                                        .map(pair -> pair.getValue().getKey())
                                         .collect(Collectors.toList());
                                 List<String> addressList = coordinateAddressPairs.stream()
-                                        .map(AbstractMap.SimpleEntry::getValue)
+                                        .map(pair -> pair.getValue().getValue())
                                         .collect(Collectors.toList());
 
+                                // Calculate the route distance
                                 Mono<Double> distanceMono = routingService.calculateRouteDistance(coordinates);
                                 return distanceMono.map(distance -> {
+                                    // Build the invoice
                                     Invoice invoice = buildInvoice(logData, coordinates, addressList, distance, providerId);
-                                    logData.setInvoiceStatus("Abgeschlossen");  // Update the status
-                                    driversLogDataService.saveDriversLogData(logData, providerId).subscribe();  // Save the log data with updated status
-                                    return invoice;  // Return the newly created invoice
+
+                                    // Update the status of the log data
+                                    logData.setInvoiceStatus("Abgeschlossen");
+
+                                    // Save the log data with the updated status
+                                    driversLogDataService.saveDriversLogData(logData, providerId).subscribe();
+
+                                    // Return the newly created invoice
+                                    return invoice;
                                 });
                             });
                 });
