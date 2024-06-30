@@ -38,7 +38,7 @@ export class VehicleListComponent implements OnInit {
   }
 
   editVehicle(id: number): void {
-    this.router.navigate(['/editVehicle', id]); // Adjust the route as needed
+    this.router.navigate(['/editVehicle', id]);
   }
 
   deleteVehicle(id: number): void {
@@ -47,7 +47,7 @@ export class VehicleListComponent implements OnInit {
       this.http.delete(`http://localhost:8080/vehicles/${id}?providerId=${providerId}`).subscribe({
         next: () => {
           alert('Vehicle deleted successfully!');
-          this.loadVehicles(); // Refresh the list after deletion
+          this.loadVehicles();
         },
         error: (error) => console.error(error)
       });

@@ -84,7 +84,6 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       if (this.mapContainer) {
         this.initMap();
-        // any further operations that depend on mapContainer
       } else {
         console.error('mapContainer is not available');
       }
@@ -235,9 +234,9 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
         // Define the custom icon
         const customIcon = L.icon({
           iconUrl: 'assets/map_pointer_icon.png', // Path to the icon image in your project's assets folder
-          iconSize: [30, 40], // Size of the icon
-          iconAnchor: [15, 20], // Point of the icon which will correspond to marker's location
-          popupAnchor: [0, -20] // Point from which the popup should open relative to the iconAnchor
+          iconSize: [30, 40],
+          iconAnchor: [15, 20],
+          popupAnchor: [0, -20]
         });
 
 
@@ -375,7 +374,7 @@ export class InvoiceViewComponent implements OnInit, AfterViewInit {
         }
 
         // Add the map image to the PDF
-        const imgWidth = 180; // Adjust width to fit the content
+        const imgWidth = 180;
         const imgHeight = canvas.height * imgWidth / canvas.width;
         pdf.addImage(imgData, 'PNG', 10, (pdf as any).lastAutoTable.finalY + 10, imgWidth, imgHeight);
 

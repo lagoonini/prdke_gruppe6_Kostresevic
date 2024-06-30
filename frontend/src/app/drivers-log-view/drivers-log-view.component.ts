@@ -18,7 +18,7 @@ interface Route {
 interface DriversLog {
   id: number;
   route: Route;
-  addresses: string[]; // Ensure this is included as per your backend structure
+  addresses: string[];
   invoiceStatus: any;
 }
 
@@ -28,13 +28,13 @@ interface DriversLog {
   styleUrls: ['./drivers-log-view.component.scss']
 })
 export class DriversLogViewComponent implements OnInit {
-  log$: Observable<DriversLog> = of(); // Initialized with an empty observable
-  logId: number = 0; // Default value for logId
+  log$: Observable<DriversLog> = of();
+  logId: number = 0;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.logId = +this.route.snapshot.params['id']; // Using the unary plus to convert to number
+    this.logId = +this.route.snapshot.params['id'];
     this.loadLogDetails();
   }
 

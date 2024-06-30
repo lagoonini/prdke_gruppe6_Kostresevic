@@ -36,7 +36,7 @@ public class TransportServiceProviderController {
                     provider.getCompanyName(),
                     provider.getCompanyAddress(),
                     provider.getEmail(),
-                    null // Do not include the password in the DTO
+                    null
             );
             return ResponseEntity.ok(dto);
         } catch (RuntimeException e) {

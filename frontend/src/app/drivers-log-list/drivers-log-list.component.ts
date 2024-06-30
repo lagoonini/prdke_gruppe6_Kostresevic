@@ -45,7 +45,7 @@ export class DriversLogListComponent implements OnInit {
   }
 
   editLog(id: number): void {
-    this.router.navigate(['/editDriversLog', id]); // Adjust the navigation route as needed
+    this.router.navigate(['/editDriversLog', id]);
   }
 
   deleteLog(id: number): void {

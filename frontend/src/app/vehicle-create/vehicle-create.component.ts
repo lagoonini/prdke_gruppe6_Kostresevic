@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GeocodeService } from '../geocode-service/geocode.service'; // Ensure this path matches your project structure
+import { GeocodeService } from '../geocode-service/geocode.service';
 import { firstValueFrom } from 'rxjs';
 
 interface Vehicle {
@@ -74,10 +74,10 @@ export class VehicleCreateComponent implements OnInit {
         wheelchairAccessible: this.wheelchairAccessible,
         startPoint: this.startPoint,
         endPoint: this.endPoint,
-        startPointLatitude: startPointCoords.latitude, // Set latitude
-        startPointLongitude: startPointCoords.longitude, // Set longitude
-        endPointLatitude: endPointCoords.latitude, // Set latitude
-        endPointLongitude: endPointCoords.longitude, // Set longitude
+        startPointLatitude: startPointCoords.latitude,
+        startPointLongitude: startPointCoords.longitude,
+        endPointLatitude: endPointCoords.latitude,
+        endPointLongitude: endPointCoords.longitude,
       };
 
       const providerId = localStorage.getItem('providerId');
@@ -129,6 +129,6 @@ export class VehicleCreateComponent implements OnInit {
     this.wheelchairAccessible = false;
     this.startPoint = '';
     this.endPoint = '';
-    this.loadVehicles(); // Reload vehicles to reflect changes
+    this.loadVehicles();
   }
 }

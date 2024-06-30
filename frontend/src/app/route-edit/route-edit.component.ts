@@ -100,9 +100,9 @@ export class RouteEditComponent implements OnInit, AfterViewInit {
         // Define the custom icon
         const customIcon = L.icon({
           iconUrl: 'assets/map_pointer_icon.png', // Path to the icon image in your project's assets folder
-          iconSize: [30, 40], // Size of the icon
-          iconAnchor: [15, 20], // Point of the icon which will correspond to marker's location
-          popupAnchor: [0, -20] // Point from which the popup should open relative to the iconAnchor
+          iconSize: [30, 40],
+          iconAnchor: [15, 20],
+          popupAnchor: [0, -20]
         });
 
         // Add markers with the custom icon for the start and end points
@@ -121,7 +121,6 @@ export class RouteEditComponent implements OnInit, AfterViewInit {
 
   async saveRoute(): Promise<void> {
     try {
-      // Assuming startPoint and endPoint inputs are addresses needing geocoding
       const startPointCoords = await firstValueFrom(this.geocodeService.getCoordinates(this.routeDetails.startPoint));
       const endPointCoords = await firstValueFrom(this.geocodeService.getCoordinates(this.routeDetails.endPoint));
 
@@ -144,18 +143,14 @@ export class RouteEditComponent implements OnInit, AfterViewInit {
       const providerId = localStorage.getItem('providerId');
       await firstValueFrom(this.http.put(`http://localhost:8080/routes/${this.routeDetails.id}?providerId=${providerId}`, updatedRouteDetails));
 
-      // Optionally, if the backend doesn't automatically update the vehicle based on route changes,
-      // you might need to send a separate update request for the vehicle.
-      // This is hypothetical and depends on your backend implementation.
-
       alert('Route updated successfully!');
-      this.router.navigate(['/listRoute']); // Adjust the navigation route as necessary
+      this.router.navigate(['/listRoute']);
     } catch (error) {
       console.error('Failed to update route', error);
     }
   }
 
   goBack(): void {
-    this.router.navigate(['/listRoute']); // Adjust as needed
+    this.router.navigate(['/listRoute']);
   }
 }

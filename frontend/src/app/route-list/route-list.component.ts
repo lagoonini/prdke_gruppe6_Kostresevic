@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 interface Vehicle {
   id: number;
-  // Add other vehicle properties as needed
 }
 interface Route {
   id: number;
@@ -45,7 +44,7 @@ export class RouteListComponent implements OnInit {
   }
 
   editRoute(id: number): void {
-    this.router.navigate(['/editRoute', id]); // Adjust the route as needed
+    this.router.navigate(['/editRoute', id]);
   }
 
   deleteRoute(id: number): void {
@@ -54,7 +53,7 @@ export class RouteListComponent implements OnInit {
       this.http.delete(`http://localhost:8080/routes/${id}?providerId=${providerId}`).subscribe({
         next: () => {
           alert('Route deleted successfully!');
-          this.loadRoutes(); // Refresh the list after deletion
+          this.loadRoutes();
         },
         error: (error) => console.error(error)
       });
