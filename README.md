@@ -1,4 +1,4 @@
-# Projekt Setup
+# Projekt Setup (WICHTIG: Release 3 ist der aktuelle und finale Stand des Projekts)
 
 ## Backend einrichten mit Spring Boot
 
